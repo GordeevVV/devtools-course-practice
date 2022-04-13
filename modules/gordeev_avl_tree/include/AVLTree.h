@@ -6,9 +6,9 @@
 #include <iostream>
 
 class AVLTree {
-public:
-    struct node // struct to image tree knots and root
-    {
+ public:
+    // struct to image tree knots and root
+    struct node {
         node() {
             left = right = nullptr;
             height = 1;
@@ -49,4 +49,4 @@ public:
     node *remove(node *p, int k);
 };
 
-#endif //MODULES_GORDEEV_AVL_TREE_INCLUDE_AVLTREE_H_
+#endif  // MODULES_GORDEEV_AVL_TREE_INCLUDE_AVLTREE_H_

@@ -36,16 +36,16 @@ AVLTree::node *AVLTree::rotateleft(node *q) {
 
 AVLTree::node *AVLTree::balance(node *p) {
     fixheight(p);
-    if( bfactor(p)==2 )
-    {
-        if( bfactor(p->right) < 0 )
+    if (bfactor(p) == 2) {
+        if (bfactor(p->right) < 0) {
             p->right = rotateright(p->right);
+        }
         return rotateleft(p);
     }
-    if( bfactor(p)==-2 )
-    {
-        if( bfactor(p->left) > 0  )
+    if (bfactor(p) == -2) {
+        if (bfactor(p->left) > 0) {
             p->left = rotateleft(p->left);
+        }
         return rotateright(p);
     }
     return p;
@@ -72,13 +72,14 @@ AVLTree::node *AVLTree::removemin(node *p) {
 }
 
 AVLTree::node *AVLTree::remove(node *p, int k) {
-    if (!p) return 0;
-    if (k < p->key)
+    if (!p) {
+        return 0;
+    }
+    if (k < p->key) {
         p->left = remove(p->left, k);
-    else if (k > p->key)
+    } else if (k > p->key) {
         p->right = remove(p->right, k);
-    else //  k == p->key
-    {
+    } else {
         node *q = p->left;
         node *r = p->right;
         delete p;
