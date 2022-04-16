@@ -4,7 +4,7 @@ file(GLOB srcs "*.cpp")
 set_source_files_properties(${srcs} PROPERTIES
     LABELS "${MODULE};Test")
 
-add_executable(${target} ${srcs} ${hdrs})
+add_executable(${target} ${srcs} ${hdrs} test_gordeev_v_complex_number.cpp)
 set_target_properties(${target} PROPERTIES
     LABELS "${MODULE};Test")
 

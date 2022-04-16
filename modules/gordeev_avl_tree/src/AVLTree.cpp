@@ -2,92 +2,92 @@
 
 #include "include/AVLTree.h"
 
-unsigned char AVLTree::height(node *p) {
-    return p ? p->height : 0;
+unsigned char AVLTree::height(node *root) {
+    return root ? root->height : 0;
 }
 
-int AVLTree::bfactor(node *p) {
-    return height(p->right) - height(p->left);
+int AVLTree::bfactor(node *root) {
+    return height(root->right) - height(root->left);
 }
 
-void AVLTree::fixheight(node *p) {
-    unsigned char hl = height(p->left);
-    unsigned char hr = height(p->right);
-    p->height = (hl > hr ? hl : hr) + 1;
+void AVLTree::fixheight(node *root) {
+    unsigned char hl = height(root->left);
+    unsigned char hr = height(root->right);
+    root->height = (hl > hr ? hl : hr) + 1;
 }
 
-AVLTree::node *AVLTree::rotateright(node *p) {
-    node *q = p->left;
-    p->left = q->right;
-    q->right = p;
-    fixheight(p);
+AVLTree::node *AVLTree::rotateright(node *root) {
+    node *q = root->left;
+    root->left = q->right;
+    q->right = root;
+    fixheight(root);
     fixheight(q);
     return q;
 }
 
-AVLTree::node *AVLTree::rotateleft(node *q) {
-    node *p = q->right;
-    q->right = p->left;
-    p->left = q;
-    fixheight(q);
-    fixheight(p);
-    return p;
+AVLTree::node *AVLTree::rotateleft(node *tmp) {
+    node *root = tmp->right;
+    tmp->right = root->left;
+    root->left = tmp;
+    fixheight(tmp);
+    fixheight(root);
+    return root;
 }
 
-AVLTree::node *AVLTree::balance(node *p) {
-    fixheight(p);
-    if (bfactor(p) == 2) {
-        if (bfactor(p->right) < 0) {
-            p->right = rotateright(p->right);
+AVLTree::node *AVLTree::balance(node *root) {
+    fixheight(root);
+    if (bfactor(root) == 2) {
+        if (bfactor(root->right) < 0) {
+            root->right = rotateright(root->right);
         }
-        return rotateleft(p);
+        return rotateleft(root);
     }
-    if (bfactor(p) == -2) {
-        if (bfactor(p->left) > 0) {
-            p->left = rotateleft(p->left);
+    if (bfactor(root) == -2) {
+        if (bfactor(root->left) > 0) {
+            root->left = rotateleft(root->left);
         }
-        return rotateright(p);
+        return rotateright(root);
     }
-    return p;
+    return root;
 }
 
-AVLTree::node *AVLTree::insert(node *p, int k) {
-    if (!p) return new node(k);
-    if (k < p->key)
-        p->left = insert(p->left, k);
+AVLTree::node *AVLTree::insert(node *root, int k) {
+    if (!root) return new node(k);
+    if (k < root->key)
+        root->left = insert(root->left, k);
     else
-        p->right = insert(p->right, k);
-    return balance(p);
+        root->right = insert(root->right, k);
+    return balance(root);
 }
 
-AVLTree::node *AVLTree::findmin(node *p) {
-    return p->left ? findmin(p->left) : p;
+AVLTree::node *AVLTree::findmin(node *root) {
+    return root->left ? findmin(root->left) : root;
 }
 
-AVLTree::node *AVLTree::removemin(node *p) {
-    if (p->left == 0)
-        return p->right;
-    p->left = removemin(p->left);
-    return balance(p);
+AVLTree::node *AVLTree::removemin(node *root) {
+    if (root->left == 0)
+        return root->right;
+    root->left = removemin(root->left);
+    return balance(root);
 }
 
-AVLTree::node *AVLTree::remove(node *p, int k) {
-    if (!p) {
+AVLTree::node *AVLTree::remove(node *root, int k) {
+    if (!root) {
         return 0;
     }
-    if (k < p->key) {
-        p->left = remove(p->left, k);
-    } else if (k > p->key) {
-        p->right = remove(p->right, k);
+    if (k < root->key) {
+        root->left = remove(root->left, k);
+    } else if (k > root->key) {
+        root->right = remove(root->right, k);
     } else {
-        node *q = p->left;
-        node *r = p->right;
-        delete p;
+        node *q = root->left;
+        node *r = root->right;
+        delete root;
         if (!r) return q;
         node *min = findmin(r);
         min->right = removemin(r);
         min->left = q;
         return balance(min);
     }
-    return balance(p);
+    return balance(root);
 }

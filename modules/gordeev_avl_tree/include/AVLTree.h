@@ -28,25 +28,27 @@ class AVLTree {
 
     AVLTree() = default;;
 
-    unsigned char height(node *p);
+    // Height of the tree
+    unsigned char height(node *root);
 
-    int bfactor(node *p);
+    // Calculate balance factor
+    int bfactor(node *root);
 
-    void fixheight(node *p);
+    void fixheight(node *root);
 
-    node *rotateright(node *p);
+    node *rotateright(node *root);
 
-    node *rotateleft(node *q);
+    node *rotateleft(node *root);
 
-    node *balance(node *p);
+    node *balance(node *root);
 
-    node *insert(node *p, int k);
+    node *insert(node *root, int k);
 
-    node *findmin(node *p);
+    node *findmin(node *root);
 
-    node *removemin(node *p);
+    node *removemin(node *root);
 
-    node *remove(node *p, int k);
+    node *remove(node *root, int k);
 };
 
 #endif  // MODULES_GORDEEV_AVL_TREE_INCLUDE_AVLTREE_H_
