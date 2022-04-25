@@ -73,12 +73,12 @@ AVLTree::node *AVLTree::removemin(node *root) {
 
 AVLTree::node *AVLTree::remove(node *root, int k) {
     if (!root) {
-        return 0;
+        return nullptr;
     }
     if (k < root->key) {
         root->left = remove(root->left, k);
     } else if (k > root->key) {
-        root->right = remove(root->right, k);
+         root->right = remove(root->right, k);
     } else {
         node *q = root->left;
         node *r = root->right;

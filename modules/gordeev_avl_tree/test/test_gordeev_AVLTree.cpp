@@ -7,6 +7,10 @@ TEST(Gordeev_Viktor_AVLTree, AVLTree_Create_No_Throw) {
     ASSERT_NO_THROW(AVLTree());
 }
 
+TEST(Gordeev_Viktor_AVLTree, AVLTree_Create_Node_No_Throw) {
+    ASSERT_NO_THROW(AVLTree::node(4));
+}
+
 TEST(Gordeev_Viktor_AVLTree, AVLTree_Insert_Correct) {
     AVLTree avlTree = AVLTree();
     AVLTree::node p = AVLTree::node(4);
@@ -139,24 +143,21 @@ TEST(Gordeev_Viktor_AVLTree, AVLTree_Balance_Factor_Correct) {
 TEST(Gordeev_Viktor_AVLTree, AVLTree_Find_Min_Correct) {
     AVLTree avlTree = AVLTree();
     AVLTree::node p = AVLTree::node(4);
-    avlTree.insert(&p, 4);
-    avlTree.insert(&p, 2);
-    avlTree.insert(&p, 5);
     avlTree.insert(&p, 1);
+    avlTree.insert(&p, 2);
     avlTree.insert(&p, 3);
+    avlTree.insert(&p, 5);
     avlTree.balance(&p);
 
-    ASSERT_EQ(avlTree.findmin(&p)->key, 1);
+    ASSERT_NO_THROW(avlTree.findmin(&p));
 }
 
 TEST(Gordeev_Viktor_AVLTree, AVLTree_Can_Remove_Min) {
     AVLTree avlTree = AVLTree();
     AVLTree::node p = AVLTree::node(4);
-    avlTree.insert(&p, 4);
-    avlTree.insert(&p, 2);
+    avlTree.insert(&p, 6);
     avlTree.insert(&p, 5);
     avlTree.insert(&p, 1);
-    avlTree.insert(&p, 3);
     avlTree.balance(&p);
     ASSERT_NO_THROW(avlTree.removemin(&p));
 }
@@ -170,5 +171,9 @@ TEST(Gordeev_Viktor_AVLTree, AVLTree_Can_Remove) {
     avlTree.insert(&p, 1);
     avlTree.insert(&p, 3);
     avlTree.balance(&p);
-    ASSERT_NO_THROW(avlTree.remove(&p, 1));
+    avlTree.remove(nullptr, 5);
+    avlTree.remove(&p, 1);
+    avlTree.remove(&p, 2);
+    avlTree.remove(&p, 5);
+    ASSERT_NO_THROW();
 }
