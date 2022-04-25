@@ -156,9 +156,11 @@ TEST(Gordeev_Viktor_AVLTree, AVLTree_Find_Min_Correct) {
 TEST(Gordeev_Viktor_AVLTree, AVLTree_Can_Remove_Min) {
     AVLTree avlTree = AVLTree();
     AVLTree::node p = AVLTree::node(4);
-    avlTree.insert(&p, 6);
+    avlTree.insert(&p, 4);
+    avlTree.insert(&p, 2);
     avlTree.insert(&p, 5);
     avlTree.insert(&p, 1);
+    avlTree.insert(&p, 3);
     avlTree.balance(&p);
     ASSERT_NO_THROW(avlTree.removemin(&p));
 }
@@ -175,6 +177,5 @@ TEST(Gordeev_Viktor_AVLTree, AVLTree_Can_Remove) {
     avlTree.remove(nullptr, 5);
     avlTree.remove(&p, 1);
     avlTree.remove(&p, 2);
-    avlTree.remove(&p, 5);
     ASSERT_NO_THROW();
 }
