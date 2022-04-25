@@ -36,18 +36,6 @@ AVLTree::node *AVLTree::rotateleft(node *tmp) {
 
 AVLTree::node *AVLTree::balance(node *root) {
     fixheight(root);
-    if (bfactor(root) == 2) {
-        if (bfactor(root->right) < 0) {
-            root->right = rotateright(root->right);
-        }
-        return rotateleft(root);
-    }
-    if (bfactor(root) == -2) {
-        if (bfactor(root->left) > 0) {
-            root->left = rotateleft(root->left);
-        }
-        return rotateright(root);
-    }
     return root;
 }
 

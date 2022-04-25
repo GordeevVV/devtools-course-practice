@@ -19,7 +19,7 @@ class AVLTree {
         node *left;
         node *right;
 
-        explicit node(int k) {
+        node(int k) {
             key = k;
             left = right = nullptr;
             height = 1;
