@@ -14,12 +14,12 @@ class AVLTree {
             height = 1;
         }
 
-        int key;
+        int key{};
         unsigned char height;
         node *left;
         node *right;
 
-        node(int k) {
+        explicit node(int k) {
             key = k;
             left = right = nullptr;
             height = 1;
