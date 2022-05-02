@@ -8,9 +8,9 @@
 #include "include/sort_selection.h"
 
 class SortSelectionApplication {
-private:
+ private:
     int parseArgument(const char* arg);
-public:
+ public:
     SortSelectionApplication();
     std::string operator()(int argc, const char** argv);
     std::string getHelp(const std::string& appname);
