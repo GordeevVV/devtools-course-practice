@@ -15,7 +15,6 @@ std::string SortSelectionApplication::getHelp(const std::string& appname) {
 
 std::string SortSelectionApplication::
 operator()(int argc, const char** argv) {
-    bool result;
     if (argc == 1)
         return getHelp(argv[0]);
 
@@ -37,7 +36,7 @@ operator()(int argc, const char** argv) {
 
         res.Sort();
 
-        result = res.Ex(Arr, 8);
+        res.Ex(Arr, 8);
     }
     catch (std::exception& exp) {
         return exp.what();
